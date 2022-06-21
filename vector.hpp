@@ -9,30 +9,50 @@ namespace ft
     template < class T, class Alloc = allocator<T> >
     class vector
     {
-    //Typedefs
-        // typedef implementation-defined const_iterator;
-        // typedef typename Allocator::const_pointer const_pointer;
-        // typedef typename Allocator::const_reference const_reference;
-        // typedef std::reverse_iterator<const_iterator> const_reverse_iterator;
-        // typedef typename Allocator::difference_type difference_type;
-        // typedef implementation-defined iterator;
-        // typedef typename Allocator::pointer pointer;
-        // typedef typename Allocator::reference reference;
-        // typedef std::reverse_iterator<iterator> reverse_iterator;
-        // typedef typename Allocator::size_type size_type;
-        // typedef typename Allocator::value_type value_type;
+        public:
+            typedef T value_type;
+            typedef Alloc allocator_type;
+            typedef typename allocator_type::reference reference;
+            typedef typename allocator_type::const_reference const_reference;
+            typedef typename allocator_type::pointer pointer;
+            typedef typename allocator_type::const_pointer const_pointer;
 
+        private:
+            pointer _vector;
+            size_type _size;
+            size_type _capacity;
+            Alloc _alloc;
         public:
             //Member functions
-                //Constructors / Destructors 
-            explicit vector (const allocator_type& alloc = allocator_type());
+                //Constructors / Destructors
+            explicit vector (const allocator_type& alloc = allocator_type()) : _alloc(alloc), _size(0), _capacity(0)
+            {
+                _vector = _alloc.allocate(_capacity);
+                return ;
+            }
             explicit vector (size_type n, const value_type& val = value_type(),
-                const allocator_type& alloc = allocator_type());
+                const allocator_type& alloc = allocator_type()) : _alloc(alloc), _size(n), _capactity(n)
+            {
+                _vector = _alloc.allocate(_capacity);
+                for(int i = 0 ;  i < n ; i++)
+                    _vector[i] = val;
+                return;
+            }
 
-            // template <class InputIterator>
+            template <class InputIterator>
             vector (InputIterator first, InputIterator last,
-                    const allocator_type& alloc = allocator_type());
-            vector (const vector& x);
+                    const allocator_type& alloc = allocator_type()) : _alloc(alloc), _capacity(last - first), _size(last - first)
+            {
+                _vector = _alloc.allocate(_capacity);
+                for(int i = first; i < ; i++)
+                    _vector[i] =
+
+                return;
+            }
+            vector (const vector& x)
+            {
+                return;
+            }
             ~vector();
             vector& operator=(vector const &rhs);
                 // Iterators:
