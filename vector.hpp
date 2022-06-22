@@ -54,17 +54,24 @@ namespace ft
 
                 return;
             }
-            vector (const vector& x)
+
+            vector (const vector& x) : _alloc(x._alloc), _size(x._size),_capactiy(x._capacity)
             {
+              this->_vector = _alloc.allocate(this->capacity);
                 return;
             }
-            ~vector();
+
+            ~vector()
+            {
+              for(iterator it = begin(); it != end(); i++)
+                _alloc.destroy(&(*it));
+              _alloc.deallocate(_vector, _capacity);
+            }
+
             vector& operator=(vector const &rhs)
             {
-                if(this = &rhs)
+                if(this == &rhs)
                     return (*this);
-
-
             }
             // Iterators:
             iterator begin()
@@ -104,66 +111,94 @@ namespace ft
             {
                 return (this->_size)
             }
+
             size_type max_size() const
             {
                 return(_alloc.maxsize())
             }
+
             void resize (size_type n, value_type val = value_type())
             {
-                if(n < this->_size)
-                    eras;
+                if(n > this->_capacity)
+                    reserve(n);
+                if(n >= this->size)
+                {
+                  for(size_type i = this->size ; i < n ; i++)
+                    _alloc.construct(this->_vector, val)
+                }
                 else
+                {
+                  for(size_type i = n; i < _size ; i++)
+                    _alloc.destroy(this->_vector + i)
+                    this->_capacity = n;
+                }
+                this->_size = n;
             }
+
             size_type capacity() const
             {
                 return (this->_capacity);
             }
+
             bool empty() const
             {
                 return (this->_size == 0);
             }
+
             void reserve (size_type n)
             {
-                if(this->_capacity < n)
-                {
-                    _alloc.destroy(_vector);
-                    _alloc.deallocate(_vector);
-                    _alloc.allocate(n);
-                    _alloc.construct();
-                }
+              if(n > max_size())
+              {
+                throw(std::length_error("ft::vector::reserve"))
+              }
+              else if(n > this->_capacity)
+              {
+                pointer tmp = _alloc.allocate(n);
+                for(size_type i = 0; i < this->_size; i++)
+                  _alloc.construct(tmp + i ,*(this->_vector + i));
+                _alloc.deallocate(this->_vector, this->_capacity);
+                this->vector = tmp;
+                this->capacity = n;
+              }
             }
             // Element access:
             reference operator[] (size_type n)
             {
-                return ( this->_vector + n);
+                return (*(this->_vector + n));
             }
             const_reference operator[] (size_type n) const
             {
-                return ( this->_vector + n);
+                return (*(this->_vector + n));
             }
             reference at (size_type n)
             {
-                return ( *(this->_vector + n));
+              if (n >= size())
+                throw (std::out_of_range("ft::vector::at"));
+              else
+                return (*(this->_vector + n));
             }
             const_reference at (size_type n) const
             {
-                return( *(this->_vector + n));
+              if (n >= size())
+                throw (std::out_of_range("ft::vector::at"));
+              else
+                return (*(this->_vector + n));
             }
             reference front()
             {
-                return ( );
+                return (*begin());
             }
             const_reference front() const
             {
-                return ( );
+                return (*begin()); //this->_vector[0]
             }
             reference back()
             {
-                return( );
+                return(*(end() - 1));
             }
             const_reference back() const
             {
-                return( );
+                return(*(end() - 1));
             }
             // Modifiers:
             template <class InputIterator>
@@ -175,7 +210,10 @@ namespace ft
             {
 
             }
-            void push_back (const value_type& val);
+            void push_back (const value_type& val)
+            {
+              return
+            }
             void pop_back();
             iterator insert (iterator position, const value_type& val);
             void insert (iterator position, size_type n, const value_type& val);
