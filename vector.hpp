@@ -17,6 +17,7 @@ namespace ft
             typedef typename allocator_type::const_reference const_reference;
             typedef typename allocator_type::pointer pointer;
             typedef typename allocator_type::const_pointer const_pointer;
+            typedef typename iterator_traits<iterator>::difference_type   difference_type;
 
         private:
             pointer _vector;
@@ -39,39 +40,50 @@ namespace ft
             {
                 _vector = _alloc.allocate(_capacity);
                 for(size_type i = 0 ;  i < n ; i++)
-                    _alloc.construc(_vector + i, val);
+                    _alloc.construct(_vector + i, val);
                 return;
             }
 
             template <class InputIterator>
             vector (InputIterator first, InputIterator last,
-                    const allocator_type& alloc = allocator_type())
+                    const allocator_type& alloc = allocator_type(),
+                    typename enable_if<!is_integral<InputIterator>::value,
+                    InputIterator>::type* = nullptr)
                     : _alloc(alloc), _size(0)
             {
-                _vector = _alloc.allocate(_capacity);
-                for(size_t i = first; i < ; i++)
-                    _vector[i] =
+                difference_type n = last - first;
+                this->_capacity = n;
+                this->_vector = _alloc.allocate(n);
+                for (int i = 0; first!= last; first+,i++)
+                {
+                    _alloc.construct(this->_vector + i, *first);
+                    first++;
+                }
 
                 return;
             }
 
-            vector (const vector& x) : _alloc(x._alloc), _size(x._size),_capactiy(x._capacity)
+            vector (const vector& x)
+            : _alloc(allocator_type()), _vector(NULL),_size(0),_capactiy(0)
             {
-              this->_vector = _alloc.allocate(this->capacity);
-                return;
+              *this = x
             }
 
             ~vector()
             {
-              for(iterator it = begin(); it != end(); i++)
+              for (iterator it = begin(); it != end(); i++)
                 _alloc.destroy(&(*it));
               _alloc.deallocate(_vector, _capacity);
             }
 
             vector& operator=(vector const &rhs)
             {
-                if(this == &rhs)
+                if (this == &rhs)
                     return (*this);
+                clear();
+                assign(rhs.begin, rhs.end);
+                return (*this);
+
             }
             // Iterators:
             iterator begin()
@@ -208,8 +220,23 @@ namespace ft
             }
             // Modifiers:
             template <class InputIterator>
-            void assign (InputIterator first, InputIterator last)
+            void assign (InputIterator first, InputIterator last,
+                typename enable_if<!is_integral<InputIterator>::value,
+                InputIterator>::type* = nullptr)
             {
+                clear();
+                size_type n = last - first;
+                if (n == 0)
+                    return;
+                if (n > this->_capactiy)
+                {
+                    _alloc.deallocate(this->vector, this->_capacity);
+                    this->_vector = _alloc.allocate(n);
+                    this->_capacity = n;
+                }
+                for(size_type i = 0; first != last)
+                    _alloc.construct(this->_vector + i, *first);
+                this->_size = static_cast<size_type>(last - first);
 
             }
 
@@ -228,6 +255,7 @@ namespace ft
                     _alloc.construct(this->_vector + i, val)
                 this->_size = n;
             }
+
             void push_back (const value_type& val)
             {
                 if(this->_size == this->_capacity)
@@ -249,9 +277,7 @@ namespace ft
             {
                 int i;
                 while(size_t i = 0, i != psition; i++)
-
                 return ();
-
             }
 
             void insert (iterator position, size_type n, const value_type& val)
