@@ -54,13 +54,13 @@ namespace ft
                 difference_type n = last - first;
                 this->_capacity = n;
                 this->_vector = _alloc.allocate(n);
-                for (int i = 0; first!= last; first+,i++)
+                for (int i = 0; first != last; first++, i++)
                 {
                     _alloc.construct(this->_vector + i, *first);
                     first++;
                 }
-
-                return;
+                this->_size = static_cast<size_type> last - first;
+                return ;
             }
 
             vector (const vector& x)
@@ -81,18 +81,18 @@ namespace ft
                 if (this == &rhs)
                     return (*this);
                 clear();
-                assign(rhs.begin, rhs.end);
+                assign(rhs.begin(), rhs.end());
                 return (*this);
 
             }
             // Iterators:
             iterator begin()
             {
-                return (iterator (_vector));
+                return (iterator (this->_vector));
             }
             const_iterator begin() const
             {
-                return (iterator(_vector));
+                return (iterator(this->_vector));
             }
             iterator end()
             {
@@ -126,7 +126,7 @@ namespace ft
 
             size_type max_size() const
             {
-                return(_alloc.maxsize())
+                return(this->_alloc.max_size())
             }
 
             void resize (size_type n, value_type val = value_type())
@@ -140,7 +140,7 @@ namespace ft
                 }
                 else
                 {
-                  for(size_type i = n; i < _size ; i++)
+                  for(size_type i = n; i < this->_size ; i++)
                     _alloc.destroy(this->_vector + i)
                     this->_capacity = n;
                 }
@@ -237,7 +237,6 @@ namespace ft
                 for(size_type i = 0; first != last)
                     _alloc.construct(this->_vector + i, *first);
                 this->_size = static_cast<size_type>(last - first);
-
             }
 
             void assign (size_type n, const value_type& val)
@@ -247,9 +246,9 @@ namespace ft
                     return ;
                 if (n >= this->_capacity)
                 {
-                    _alloc.deallocate(this->_vector, this->_capacity)
+                    this->_alloc.deallocate(this->_vector, this->_capacity)
                     this->_vector = _alloc.allocate(n);
-                    _capacity = n;
+                    this->_capacity = n;
                 }
                 for(size_t i = 0; i < n ; i++)
                     _alloc.construct(this->_vector + i, val)
@@ -328,12 +327,24 @@ namespace ft
                     _alloc.construct(it, * (it + 1) );
                 pop_back();
                 return(position);
-
             }
 
             void swap (vector& x)
             {
+              allocator_type    tmp_alloc = this->_alloc;
+              pointer           tmp_ptr = this->_ptr;
+              size_type         tmp_capacity = this->_capacity;
+              size_type         tmp_size = this->_size;
 
+              this->_alloc = x._alloc;
+              this->_vector = x._ptr;
+              this->_capacity = x._capacity;
+              this->_size = x._size;
+
+              x._alloc = tmp_alloc;
+              x._ptr = tmp_ptr;
+              x._capacity = tmp_capacity;
+              x._size = tmp_size;
             }
 
             void clear()
@@ -342,10 +353,10 @@ namespace ft
                     pop_back();
             }
                 // Allocator:
-                allocator_type get_allocator() const
-                {
-
-                }
+            allocator_type get_allocator() const
+            {
+              return (Alloc(_alloc));
+            }
 
     }
 };
@@ -382,5 +393,8 @@ template <class T, class Alloc>
   }
 //swap
 template <class T, class Alloc>
-  void swap (vector<T,Alloc>& x, vector<T,Alloc>& y);
+  void swap (vector<T,Alloc>& x, vector<T,Alloc>& y)
+  {
+    x.swap(y);
+  }
 #endif
