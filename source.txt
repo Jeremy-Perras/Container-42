@@ -1,0 +1,17 @@
+Sources :
+best one :
+https://cplusplus.com/
+
+template :
+https://stackoverflow.com/questions/4872809/in-c-what-does-template-mean
+
+Source code is_integral :
+https://code.woboq.org/appleseed/include/boost/type_traits/is_integral.hpp.html
+https://code.woboq.org/appleseed/include/boost/type_traits/integral_constant.hpp.html
+
+SFINAE :
+http://codeofthedamned.com/index.php/sfinae
+https://www.codeproject.com/Articles/878913/enable-if
+
+vector source code :
+https://gcc.gnu.org/onlinedocs/libstdc++/libstdc++-html-USERS-3.4/stl__vector_8h-source.html#l00581
