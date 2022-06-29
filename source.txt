@@ -15,3 +15,9 @@ https://www.codeproject.com/Articles/878913/enable-if
 
 vector source code :
 https://gcc.gnu.org/onlinedocs/libstdc++/libstdc++-html-USERS-3.4/stl__vector_8h-source.html#l00581
+
+map source code :
+https://gcc.gnu.org/onlinedocs/libstdc++/libstdc++-api-4.5/a00930_source.html
+
+ make pair / pair source code :
+https://gcc.gnu.org/onlinedocs/libstdc++/libstdc++-html-USERS-4.3/a02030.html

@@ -33,10 +33,10 @@ namespace ft
                 move_backward(position + 1, n);
               _alloc.construct(&(*(position + n)), *position);
             }
+            Alloc _alloc;
             pointer _vector;
             size_type _size;
             size_type _capacity;
-            Alloc _alloc;
         public:
             //Member functions
                 //Constructors / Destructors
@@ -109,7 +109,7 @@ namespace ft
             }
             iterator end()
             {
-                return (const_iterator(_vector + this->_size));
+                return (iterator(_vector + this->_size));
             }
             const_iterator end() const
             {
@@ -419,4 +419,5 @@ template <class T, class Alloc>
   {
     x.swap(y);
   }
+}
 #endif

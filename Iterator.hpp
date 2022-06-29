@@ -16,31 +16,34 @@ namespace ft
     typename _Pointer = _Tp*, typename _Reference = _Tp&>
     class iterator
     {
-      /// One of the @link iterator_tags tag types@endlink.
-      typedef _Category  iterator_category;
-      /// The type "pointed to" by the iterator.
-      typedef _Tp        value_type;
-      /// Distance between iterators is represented as this type.
-      typedef _Distance  difference_type;
-      /// This type represents a pointer-to-value_type.
-      typedef _Pointer   pointer;
-      /// This type represents a reference-to-value_type.
-      typedef _Reference reference;
+        public :
+          /// One of the @link iterator_tags tag types@endlink.
+          typedef _Category  iterator_category;
+          /// The type "pointed to" by the iterator.
+          typedef _Tp        value_type;
+          /// Distance between iterators is represented as this type.
+          typedef _Distance  difference_type;
+          /// This type represents a pointer-to-value_type.
+          typedef _Pointer   pointer;
+          /// This type represents a reference-to-value_type.
+          typedef _Reference reference;
     };
 
     template<typename _Iterator>
     class iterator_traits
     {
-        typedef typename _Iterator::iterator_category iterator_category;
-        typedef typename _Iterator::value_type        value_type;
-        typedef typename _Iterator::difference_type   difference_type;
-        typedef typename _Iterator::pointer           pointer;
-        typedef typename _Iterator::reference         reference;
+        public:
+            typedef typename _Iterator::iterator_category iterator_category;
+            typedef typename _Iterator::value_type        value_type;
+            typedef typename _Iterator::difference_type   difference_type;
+            typedef typename _Iterator::pointer           pointer;
+            typedef typename _Iterator::reference         reference;
     };
 
     template<typename _Tp>
     class iterator_traits<_Tp*>
     {
+    public:
         typedef random_access_iterator_tag iterator_category;
         typedef _Tp                         value_type;
         typedef ptrdiff_t                   difference_type;
@@ -51,6 +54,7 @@ namespace ft
     template<typename _Tp>
     class iterator_traits<const _Tp*>
     {
+    public:
         typedef random_access_iterator_tag iterator_category;
         typedef _Tp                         value_type;
         typedef ptrdiff_t                   difference_type;
