@@ -28,12 +28,15 @@ namespace ft
             typedef iterator_traits<iterator>::difference_type  difference_type;
             typedef size_t size_type;
 
-
-
-
-
         private:
+            typedef struct s_btree
+            {
+                struct s_btree *parent;
+                struct s_btree *right;
+                struct s_btree *left;
+                ft::pair<const Key, T>  data;
 
+            }               t_btree;
         public :
             template <class InputIterator>
             map (InputIterator first, InputIterator last,
@@ -42,6 +45,7 @@ namespace ft
             {
 
             }
+
             map (const map& x)
             {
 
@@ -49,7 +53,7 @@ namespace ft
             explicit map (const key_compare& comp = key_compare(),
             const allocator_type& alloc = allocator_type())
             {
-                
+
             }
             ~map()
             {

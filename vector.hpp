@@ -12,19 +12,19 @@ namespace ft
     class vector
     {
         public:
-            typedef T value_type;
-            typedef Alloc allocator_type;
-            typedef size_t   size_type;
-            typedef typename allocator_type::reference reference;
-            typedef typename allocator_type::const_reference const_reference;
-            typedef typename allocator_type::pointer pointer;
-            typedef typename allocator_type::const_pointer const_pointer;
+            typedef T                                                     value_type;
+            typedef Alloc                                                 allocator_type;
+            typedef size_t                                                size_type;
+            typedef typename allocator_type::reference                    reference;
+            typedef typename allocator_type::const_reference              const_reference;
+            typedef typename allocator_type::pointer                      pointer;
+            typedef typename allocator_type::const_pointer                const_pointer;
 
             typedef ft::random_access_iterator<value_type>                iterator;
             typedef ft::random_access_iterator<const value_type>          const_iterator;
             typedef ft::reverse_iterator<iterator>                        reverse_iterator;
             typedef ft::reverse_iterator<const_iterator>                  const_reverse_iterator;
-            typedef typename iterator_traits<iterator>::difference_type difference_type;
+            typedef typename iterator_traits<iterator>::difference_type   difference_type;
 
         private:
             void move_backward(iterator position, size_type n = 1)
@@ -33,10 +33,10 @@ namespace ft
                 move_backward(position + 1, n);
               _alloc.construct(&(*(position + n)), *position);
             }
-            Alloc _alloc;
-            pointer _vector;
-            size_type _size;
-            size_type _capacity;
+            Alloc       _alloc;
+            pointer     _vector;
+            size_type   _size;
+            size_type   _capacity;
         public:
             //Member functions
                 //Constructors / Destructors
