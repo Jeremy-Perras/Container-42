@@ -11,22 +11,22 @@ namespace ft
     class map
     {
         public:
-            typedef Key key_type;
-            typedef T mapped_type;
-            typedef ft::pair<const key_type, mapped_type> value_type;
-            typedef Compare key_compare;
-            typedef Alloc allocator_type;
+            typedef Key                                             key_type;
+            typedef T                                               mapped_type;
+            typedef ft::pair<const key_type, mapped_type>           value_type;
+            typedef Compare                                         key_compare;
+            typedef Alloc                                           allocator_type;
             typedef value_compare;
-            typedef typename allocator_type::reference  reference; // T&
-            typedef typename allocator_type::const_reference const_reference; //const t&
+            typedef typename allocator_type::reference              reference; // T&
+            typedef typename allocator_type::const_reference        const_reference; //const t&
             typedef typename allocator_type::pointer pointer; // T*
-            typedef typename allocator_type::const_pointer const_pointer; // const T*
-            typedef ft::bidirectional_iterator<value_type>  iterator;
+            typedef typename allocator_type::const_pointer          const_pointer; // const T*
+            typedef ft::bidirectional_iterator<value_type>          iterator;
             typedef ft::bidirectional_iterator<const value_type>    const_iterator;
-            typedef ft::reverse_iterator<iterator>  reverse_iterator;
-            typedef ft::reverse_iterator<const_iterator>    const_reverse_iterator;
-            typedef iterator_traits<iterator>::difference_type  difference_type;
-            typedef size_t size_type;
+            typedef ft::reverse_iterator<iterator>                  reverse_iterator;
+            typedef ft::reverse_iterator<const_iterator>            const_reverse_iterator;
+            typedef iterator_traits<iterator>::difference_type      difference_type;
+            typedef size_t                                          size_type;
 
         private:
             typedef struct s_btree

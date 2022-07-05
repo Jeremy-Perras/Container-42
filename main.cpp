@@ -21,7 +21,7 @@ int main()
     ft_vec.pop_back();
     it = ft_vec.begin();
     std::cout << *it <<std::endl;
-    for (ft::vector<int>::iterator it = ft_vec.begin(); it != ft_vec.end(); ++it)
+    for (ft::vector<int>::const_iterator it = ft_vec.begin(); it != ft_vec.end(); ++it)
         std::cout << ' ' << *it;
     std::cout << '\n';
 
