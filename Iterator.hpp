@@ -80,7 +80,16 @@ namespace ft
            template<typename _Iter>
             reverse_iterator(const reverse_iterator<_Iter>& it): _current(it.base())
             {}
+            template <class U>
+            reverse_iterator& operator=(const reverse_iterator<U>& rhs)
+            {
+                if(this==&rhs)
+                    return(*this);
+              _current = rhs.base();
+              return (*this);
+            }
             iterator_type base() const {return this->_current;}
+
 
             reference operator*() const
             {
@@ -200,7 +209,7 @@ namespace ft
                   typedef typename iterator<random_access_iterator_tag, T>::iterator_category   iterator_category;
 
               protected:
-              pointer _current;
+                  pointer _current;
 
               public:
                   random_access_iterator(void)                                 : _current(nullptr) {}

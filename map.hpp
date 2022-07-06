@@ -6,8 +6,8 @@ namespace ft
 {
     template < class Key,                                     // map::key_type
            class T,                                       // map::mapped_type
-           class Compare = less<Key>,                     // map::key_compare
-           class Alloc = allocator<pair<const Key,T> >    // map::allocator_type
+           class Compare = std::less<Key>,                     // map::key_compare
+           class Alloc = std::allocator<pair<const Key,T> >    // map::allocator_type
     class map
     {
         public:
@@ -16,10 +16,10 @@ namespace ft
             typedef ft::pair<const key_type, mapped_type>           value_type;
             typedef Compare                                         key_compare;
             typedef Alloc                                           allocator_type;
-            typedef value_compare;
+            // typedef value_compare;
             typedef typename allocator_type::reference              reference; // T&
             typedef typename allocator_type::const_reference        const_reference; //const t&
-            typedef typename allocator_type::pointer pointer; // T*
+            typedef typename allocator_type::pointer                pointer; // T*
             typedef typename allocator_type::const_pointer          const_pointer; // const T*
             typedef ft::bidirectional_iterator<value_type>          iterator;
             typedef ft::bidirectional_iterator<const value_type>    const_iterator;
@@ -29,14 +29,7 @@ namespace ft
             typedef size_t                                          size_type;
 
         private:
-            typedef struct s_btree
-            {
-                struct s_btree *parent;
-                struct s_btree *right;
-                struct s_btree *left;
-                ft::pair<const Key, T>  data;
 
-            }               t_btree;
         public :
             template <class InputIterator>
             map (InputIterator first, InputIterator last,
