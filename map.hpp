@@ -29,7 +29,8 @@ namespace ft
             typedef iterator_traits<iterator>::difference_type      difference_type;
             typedef size_t                                          size_type;
 
-            class value_compare : public std::binary_function<value_type, value_type, bool> {
+            class value_compare : public std::binary_function<value_type, value_type, bool>
+            {
               protected:
               key_compare comp;
 
