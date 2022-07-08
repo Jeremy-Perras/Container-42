@@ -21,3 +21,7 @@ https://gcc.gnu.org/onlinedocs/libstdc++/libstdc++-api-4.5/a00930_source.html
 
  make pair / pair source code :
 https://gcc.gnu.org/onlinedocs/libstdc++/libstdc++-html-USERS-4.3/a02030.html
+
+rbtree :
+https://www.programiz.com/dsa/red-black-tree
+https://www.youtube.com/watch?v=JwgeECkckRo&list=LL&index=5
